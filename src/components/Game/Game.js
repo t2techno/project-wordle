@@ -4,6 +4,7 @@ import { sample, range } from "../../utils";
 import { WORDS } from "../../data";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import { checkGuess } from "../../game-helpers";
+import Banner from "../Banner";
 import Input from "../Input";
 import GuessHistory from "../GuessHistory";
 import Guess from "../Guess/Guess";
@@ -16,6 +17,9 @@ console.info({ answer });
 function Game() {
   const [guessHistory, setGuessHistory] = React.useState([]);
 
+  // in-progress, success, failure
+  const [gameStatus, setGameStatus] = React.useState("in-progress");
+
   const handleGuess = (guess) => {
     const status = checkGuess(guess, answer).map(({ _, status }) => status);
     const nextGuessHistory = [
@@ -23,6 +27,15 @@ function Game() {
       { id: Math.random(), guess, status },
     ];
     setGuessHistory(nextGuessHistory);
+
+    if (guess === answer) {
+      setGameStatus("success");
+      return;
+    }
+
+    if (nextGuessHistory.length === NUM_OF_GUESSES_ALLOWED) {
+      setGameStatus("failure");
+    }
   };
 
   return (
@@ -32,6 +45,11 @@ function Game() {
       ))}
       <GuessHistory guessHistory={guessHistory} />
       <Input handleSubmit={handleGuess} />
+      <Banner
+        status={gameStatus}
+        answer={answer}
+        numGuesses={guessHistory.length}
+      />
     </>
   );
 }
