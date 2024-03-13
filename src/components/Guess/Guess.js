@@ -3,11 +3,11 @@ import { range } from "../../utils";
 
 function Guess({ guess }) {
   const wordLength = 5;
-
+  console.log(guess);
   return (
     <p className="guess">
       {range(0, wordLength).map((i) => (
-        <span className="cell" key={guess.id}>
+        <span key={i} className={`cell ${guess ? guess.status[i] : ""}`}>
           {guess && guess.guess.charAt(i)}
         </span>
       ))}
