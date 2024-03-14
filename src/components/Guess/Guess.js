@@ -4,11 +4,23 @@ import { range } from "../../utils";
 
 function Guess({ guess }) {
   const wordLength = 5;
+  if (guess === "") {
+    return (
+      <Wrapper>
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
+        <Cell />
+      </Wrapper>
+    );
+  }
+
   console.log(guess);
   return (
     <Wrapper>
       {range(0, wordLength).map((i) => (
-        <Cell key={i} className={`${guess ? guess.status[i] : ""}`}>
+        <Cell key={i} className={`${guess.status[i]}`}>
           {guess && guess.guess.charAt(i)}
         </Cell>
       ))}

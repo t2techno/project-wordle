@@ -18,7 +18,6 @@ const GameWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--game-spacing);
   padding: var(--game-spacing) 32px;
   margin: 0 auto;
   min-width: 250px;
