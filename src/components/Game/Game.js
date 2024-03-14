@@ -43,7 +43,6 @@ function Game() {
       {range(0, NUM_OF_GUESSES_ALLOWED).map((i) => (
         <Guess guess={guessHistory.length > i && guessHistory[i]} key={i} />
       ))}
-      <GuessHistory guessHistory={guessHistory} />
       <Input handleSubmit={handleGuess} />
       <Banner
         status={gameStatus}
