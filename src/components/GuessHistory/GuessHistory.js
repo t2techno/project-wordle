@@ -1,15 +1,27 @@
 import React from "react";
+import styled from "styled-components";
 
 function GuessHistory({ guessHistory }) {
   return (
-    <ul className="guess-results">
+    <GuessResults>
       {guessHistory.map((val) => (
-        <li className="guess" key={val.id}>
-          {val.guess}
-        </li>
+        <Guess key={val.id}>{val.guess}</Guess>
       ))}
-    </ul>
+    </GuessResults>
   );
 }
+
+const GuessResults = styled.ul`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Guess = styled.li`
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+`;
 
 export default GuessHistory;

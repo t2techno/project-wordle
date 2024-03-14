@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 function Input({ handleSubmit }) {
   const [value, setValue] = React.useState("");
@@ -13,7 +14,7 @@ function Input({ handleSubmit }) {
     setValue("");
   };
   return (
-    <form className="guess-input-wrapper" onSubmit={onSubmit}>
+    <GuessInputWrapper onSubmit={onSubmit}>
       <label htmlFor="guess-input">Enter guess:</label>
       <input
         id="guess-input"
@@ -23,8 +24,29 @@ function Input({ handleSubmit }) {
         maxLength={5}
         onChange={(event) => setValue(event.target.value.toUpperCase())}
       />
-    </form>
+    </GuessInputWrapper>
   );
 }
+
+const GuessInputWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 6.75rem;
+
+  & label {
+    font-size: 1.25rem;
+  }
+
+  & input {
+    display: block;
+    width: 100%;
+    font-size: 2rem;
+    border: 2px solid var(--color-gray-300);
+    border-radius: 4px;
+    padding: 8px 16px;
+    outline-offset: 4px;
+  }
+`;
 
 export default Input;
