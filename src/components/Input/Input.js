@@ -17,11 +17,13 @@ function Input({ handleSubmit }) {
     <GuessInputWrapper onSubmit={onSubmit}>
       <label htmlFor="guess-input">Enter guess:</label>
       <input
+      required
         id="guess-input"
         type="text"
         value={value}
         minLength={5}
         maxLength={5}
+        pattern="[a-zA-Z]{5}"
         onChange={(event) => setValue(event.target.value.toUpperCase())}
       />
     </GuessInputWrapper>
