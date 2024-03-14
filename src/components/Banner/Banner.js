@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Banner({ status, answer, numGuesses }) {
+function Banner({ status, answer, numGuesses, resetGame }) {
   if (status === "in-progress") {
     return;
   }
@@ -16,12 +16,14 @@ function Banner({ status, answer, numGuesses }) {
           </strong>
           .
         </p>
+        <AgainButton onClick={() => resetGame()}>Another Round!</AgainButton>
       </HappyBanner>
     ) : (
       <SadBanner>
         <p>
           Sorry, the correct answer is <strong>{answer}</strong>.
         </p>
+        <AgainButton onClick={() => resetGame()}>Try Again!</AgainButton>
       </SadBanner>
     );
 
@@ -43,6 +45,9 @@ const BaseBanner = styled.div`
   will-change: transform;
   color: white;
 
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
   /*
   Keyframe animations
 */
@@ -62,6 +67,24 @@ const HappyBanner = styled(BaseBanner)`
 
 const SadBanner = styled(BaseBanner)`
   background: var(--color-error);
+`;
+
+const AgainButton = styled.button`
+  background-color: var(--color-gray-900);
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--color-gray-100);
+  transition: 500ms;
+
+  &:hover {
+    transform: translateY(-3px) scale(1.1);
+    filter: brightness(110%);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    transition: 50ms;
+  }
 `;
 
 export default Banner;

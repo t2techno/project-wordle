@@ -9,12 +9,9 @@ import Input from "../Input";
 import Guess from "../Guess/Guess";
 import Keyboard from "../Keyboard";
 
-// Pick a random word on every pageload.
-const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
-
 function Game() {
+  const [answer, setAnswer] = React.useState(sample(WORDS));
+  console.log(answer);
   const [guessHistory, setGuessHistory] = React.useState([]);
 
   // using the ascii values of letters as indices
@@ -62,6 +59,13 @@ function Game() {
     }
   };
 
+  const resetGame = () => {
+    setAnswer(sample(WORDS));
+    setGuessHistory([]);
+    setKeyStatus(new Array(127).fill(""));
+    setGameStatus("in-progress");
+  };
+
   return (
     <>
       {range(0, NUM_OF_GUESSES_ALLOWED).map((i) => (
@@ -73,6 +77,7 @@ function Game() {
         status={gameStatus}
         answer={answer}
         numGuesses={guessHistory.length}
+        resetGame={resetGame}
       />
     </>
   );
